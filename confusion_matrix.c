@@ -2,13 +2,16 @@
 #include <Python.h>
 #include <numpy/arrayobject.h>
 
-static PyObject *metrics(PyObject *self, PyObject *args)
+static PyObject *confusion_matrix(PyObject *self, PyObject *args)
 {
+  size_t i;
+  int toc[2][2] = { 0 };
+  int equal;
+  int positive;
+  int offset;
+
   PyArrayObject *y_true = NULL;
   PyArrayObject *y_pred = NULL;
-  int tp = 0, tn = 0, fp = 0, fn = 0;
-  size_t i;
-  int offset = 1;
 
   if (!PyArg_ParseTuple(args, "O!O!", &PyArray_Type, &y_true, &PyArray_Type, &y_pred)) {
     return NULL;
@@ -18,24 +21,22 @@ static PyObject *metrics(PyObject *self, PyObject *args)
   i = y_true->dimensions[0] * offset;
 
   while (i -= offset) {
-    // printf("%x | %x | %x \r\n", y_true->data[i], y_pred->data[i], y_true->data[i] & y_pred->data[i]);
-    tp += y_true->data[i] & y_pred->data[i];
-    tn += !y_true->data[i] & !y_pred->data[i];
-    fp += !y_true->data[i] & y_pred->data[i];
-    fn += y_true->data[i] & !y_pred->data[i];
+    positive = y_true->data[i];
+    equal = y_true->data[i] ^ y_pred->data[i];
+    toc[positive][equal] += 1;
   }
 
-  return Py_BuildValue("(iiii)", tn, fp, fn, tp);
+  return Py_BuildValue("(iiii)",toc[0, 0], toc[0, 1], toc[1, 0], toc[1, 1]);
 }
 
 static PyMethodDef METRICS_METHODS[] = {
-  {"metrics", metrics, METH_VARARGS, ""},
+  {"confusion_matrix", confusion_matrix, METH_VARARGS, ""},
   {NULL, NULL, 0, NULL}
 };
 
 static struct PyModuleDef METRICS_MODULE = {
   PyModuleDef_HEAD_INIT,
-  "metrics",
+  "confusion_matrix",
   NULL,
   -1,
   METRICS_METHODS

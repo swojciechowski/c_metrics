@@ -1,10 +1,12 @@
-from distutils.core import setup, Extension
-
-m_metrics = Extension('metrics', sources = ['metrics.c'])
+from setuptools import Extension, setup
+import numpy
 
 setup(
-    name = 'metrics',
-    version = '1.0',
-    description = 'This is a demo package',
-    ext_modules = [m_metrics]
+   name='cm-metrics',
+   version='0.0.1',
+   packages=['cm-metrics'],
+   ext_modules=[
+    Extension(name="cm-metrics", sources=["confusion_matrix.c"], include_dirs=[numpy.get_include()])
+   ],
+   install_requires=['numpy']
 )

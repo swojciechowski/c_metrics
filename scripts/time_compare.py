@@ -3,7 +3,7 @@ import time
 
 from sklearn.metrics import confusion_matrix
 from strlearn.metrics import binary_confusion_matrix
-from metrics import metrics
+from src.metrics import metrics
 
 np.random.seed(1410)
 N = 1000000

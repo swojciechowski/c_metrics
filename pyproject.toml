@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0", "numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cm-metrics"
+version = "0.0.1"
+authors = [
+  { name="Szymon Wojciechowski", email="szymon.wojciechowski@pwr.edu.pl" },
+]
+description = "A robust implementation of confusion matrix based metrics."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/w4k2/cm-metrics"
