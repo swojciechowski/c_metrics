@@ -3,7 +3,7 @@ import time
 
 from sklearn.metrics import confusion_matrix
 from strlearn.metrics import binary_confusion_matrix
-from src.metrics import metrics
+from skcm import confusion_matrix as skcm
 
 np.random.seed(1410)
 N = 1000000
@@ -16,7 +16,7 @@ cm = binary_confusion_matrix(y_true, y_pred)
 ex_time = time.time() - start
 
 print('+' * 30)
-print('strlearn')
+print('stream-learn')
 print(f"{ex_time:.6f}")
 print(*cm, sep='-')
 
@@ -25,15 +25,15 @@ cm = confusion_matrix(y_true, y_pred)
 ex_time = time.time() - start
 
 print('+' * 30)
-print('sklearn')
+print('scikit-learn')
 print(f"{ex_time:.6f}")
 print(*cm.flatten(), sep='-')
 
 start = time.time()
-cm = metrics(y_true, y_pred)
+cm = skcm(y_true, y_pred)
 ex_time = time.time() - start
 
 print('+' * 30)
-print('metrics')
+print('scikit-cm')
 print(f"{ex_time:.6f}")
 print(*cm, sep='-')

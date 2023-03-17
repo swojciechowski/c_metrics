@@ -1,16 +1,16 @@
 [build-system]
-requires = ["setuptools>=61.0", "numpy"]
+requires = ["setuptools", "numpy"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cm-metrics"
+name = "scikit-confusion_matrix"
 version = "0.0.1"
 authors = [
   { name="Szymon Wojciechowski", email="szymon.wojciechowski@pwr.edu.pl" },
 ]
 description = "A robust implementation of confusion matrix based metrics."
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -18,4 +18,4 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/w4k2/cm-metrics"
+"Homepage" = "https://github.com/w4k2"

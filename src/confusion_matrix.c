@@ -26,24 +26,24 @@ static PyObject *confusion_matrix(PyObject *self, PyObject *args)
     toc[positive][equal] += 1;
   }
 
-  return Py_BuildValue("(iiii)",toc[0, 0], toc[0, 1], toc[1, 0], toc[1, 1]);
+  return Py_BuildValue("(iiii)", toc[0, 0], toc[0, 1], toc[1, 0], toc[1, 1]);
 }
 
-static PyMethodDef METRICS_METHODS[] = {
+static PyMethodDef C_CM_METHODS[] = {
   {"confusion_matrix", confusion_matrix, METH_VARARGS, ""},
   {NULL, NULL, 0, NULL}
 };
 
-static struct PyModuleDef METRICS_MODULE = {
+static struct PyModuleDef C_CM_MODULE = {
   PyModuleDef_HEAD_INIT,
-  "confusion_matrix",
+  "c_cm",
   NULL,
   -1,
-  METRICS_METHODS
+  C_CM_METHODS
 };
 
-PyMODINIT_FUNC PyInit_metrics(void)
+PyMODINIT_FUNC PyInit_c_cm(void)
 {
   import_array();
-  return PyModule_Create(&METRICS_MODULE);
+  return PyModule_Create(&C_CM_MODULE);
 }

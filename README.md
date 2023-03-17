@@ -1,3 +1,3 @@
-# Confusion Matrix Mectrics (cm-metrics)
+# Confusion Matrix Mectrics
 
 A robust implementation of confusion matrix based metrics.
