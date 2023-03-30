@@ -3,7 +3,7 @@ requires = ["setuptools", "numpy"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "scikit-confusion_matrix"
+name = "scikit-confusion_metrics"
 version = "0.0.1"
 authors = [
   { name="Szymon Wojciechowski", email="szymon.wojciechowski@pwr.edu.pl" },

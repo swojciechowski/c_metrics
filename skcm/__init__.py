@@ -1,1 +1,2 @@
-from .confusion_matrix_metrics import ConfusionMatrixMetrics
+from .confusion_metrics import ConfusionMetrics
+from confusion_matrix import confusion_matrix

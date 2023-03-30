@@ -7,9 +7,10 @@ setup(
    packages=['skcm'],
    ext_modules=[
     Extension(
-      name="ccm",
-      sources=["src/confusion_matrix.c"],
-      include_dirs=[numpy.get_include()])
+      name="confusion_matrix",
+      sources=["confusion_matrix/confusion_matrix.c"],
+      include_dirs=[numpy.get_include()],
+      define_macros=[])
    ],
    install_requires=['numpy']
 )

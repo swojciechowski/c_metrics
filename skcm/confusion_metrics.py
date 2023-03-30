@@ -1,6 +1,6 @@
 import numpy as np
 
-class ConfusionMatrixMetrics:
+class ConfusionMetrics:
     def __init__(self, confusion_matrix):
         if confusion_matrix.shape != (2, 2):
             raise ValueError("Invalid confusion matrix. Only binary problems are supported.")
