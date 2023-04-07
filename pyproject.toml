@@ -3,18 +3,17 @@ requires = ["setuptools", "numpy"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "scikit-confusion_metrics"
+name = "confusion-metrics"
 version = "0.0.1"
 authors = [
   { name="Szymon Wojciechowski", email="szymon.wojciechowski@pwr.edu.pl" },
 ]
 description = "A robust implementation of confusion matrix based metrics."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
 ]
 
 [project.urls]

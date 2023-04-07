@@ -2,17 +2,18 @@ import numpy as np
 import time
 from tabulate import tabulate
 
-from sklearn.metrics import confusion_matrix as sklrn_cm
-from strlearn.metrics import binary_confusion_matrix as stlrn_cm
-from skcm import confusion_matrix as skcm_cm
+from sklearn.metrics import balanced_accuracy_score
+from confusion_metrics import ConfusionMetrics
+
+def cm_bac(y_true, y_pred):
+    return ConfusionMetrics(y_true, y_pred).balanced_accuracy
 
 np.random.seed(1410)
-N = 1000000
+N = 10000
 
-cms = [
-    ("scikit-learn", sklrn_cm),
-    ("stream-learn", stlrn_cm),
-    ("scikit-metrics", skcm_cm)
+fn_callbacks = [
+    ("scikit-learn", balanced_accuracy_score),
+    ("confusion-metrics", cm_bac)
 ]
 
 y_true = np.random.randint(2, size=N)
@@ -20,12 +21,14 @@ y_pred = np.random.randint(2, size=N)
 
 times = []
 
-for cm_name, cm_cb in cms:
+for fn_name, fn_cb in fn_callbacks:
     start = time.time()
-    cm = cm_cb(y_true, y_pred)
+    metric = fn_cb(y_true, y_pred)
     ex_time = time.time() - start
+    
+    print(fn_name, ':', metric)
 
-    times.append((cm_name, ex_time))
+    times.append((fn_name, ex_time))
 
 tbl = tabulate(times, headers=["Name", "Time [s]"])
 print(tbl)

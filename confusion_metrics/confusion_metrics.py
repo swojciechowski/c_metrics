@@ -1,31 +1,34 @@
 import numpy as np
+from confusion_matrix import confusion_matrix
 
 class ConfusionMetrics:
-    def __init__(self, confusion_matrix):
-        if confusion_matrix.shape != (2, 2):
-            raise ValueError("Invalid confusion matrix. Only binary problems are supported.")
-        
-        self.cm = confusion_matrix
+    def __init__(self, y_true, y_pred):
+        self.cm = confusion_matrix(y_true, y_pred)
+
+    @property
+    def CM(self):
+        # Confusion Matrix
+        return np.array(self.cm)
 
     @property
     def TP(self):
         # True Positive
-        return self.cm[0, 0]
+        return self.cm[1][1]
 
     @property
     def FN(self):
         # False Negative
-        return self.cm[0, 1]
+        return self.cm[0][1]
     
     @property
     def FP(self):
         # False Positive
-        return self.cm[1, 0]
+        return self.cm[1][0]
     
     @property
     def TN(self):
         # True Negative
-        return self.cm[1, 1]
+        return self.cm[0][0]
     
     @property
     def AP(self):
@@ -50,7 +53,7 @@ class ConfusionMetrics:
     @property
     def TPR(self):
         # True Positive Rate
-        return self.TP / self.P
+        return self.TP / self.AP if self.AP else 0
 
     @property
     def FNR(self):
@@ -60,7 +63,7 @@ class ConfusionMetrics:
     @property
     def TNR(self):
         # True Negative Rate
-        return self.TN / self.N
+        return self.TN / self.AN if self.AN else 0
 
     @property
     def FPR(self):
@@ -80,7 +83,7 @@ class ConfusionMetrics:
     @property
     def NPV(self):
         # Negative Predictive Value
-        return self.TN / self.PN
+        return self.TN / self.PN if self.PN else 0
 
     @property
     def FOR(self):
@@ -108,7 +111,7 @@ class ConfusionMetrics:
     
     @property
     def prevalence(self):
-        return self.P / (self.P + self.N)
+        return self.AP / (self.AP + self.AN)
 
     @property
     def markednes(self):
@@ -116,7 +119,7 @@ class ConfusionMetrics:
 
     @property
     def accuracy(self):
-        return (self.TP + self.TN) / (self.P + self.N)
+        return (self.TP + self.TN) / (self.AP + self.AN)
 
     @property
     def balanced_accuracy(self):
@@ -144,3 +147,13 @@ class ConfusionMetrics:
     @property
     def jaccard_index(self):
         return self.TP / (self.TP + self.FN + self.FP)
+
+    # Other definitions
+    sensitivity = TPR
+    recall = TPR
+    specificity = TNR
+    precision = PPV
+
+    # Get multiple metrics
+    def get_metrics(self, *metrics):
+        return [getattr(self, metric, None) for metric in metrics]

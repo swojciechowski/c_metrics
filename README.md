@@ -1,4 +1,4 @@
-# Confusion Matrix Mectrics [scikit-confusion_metrics]
+# Confusion Metrics [confusion-metrics]
 
 A robust implementation of confusion matrix based metrics.
 
